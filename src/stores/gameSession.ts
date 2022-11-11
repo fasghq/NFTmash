@@ -19,6 +19,8 @@ export const useGameSession = defineStore('gameSession',{
             // Game Play Information
             rounds: 3,
             round: 1,
+            // create gamePlay
+            gamePlay:[],
             // Selected Results
             result: [],
             gameOver: false,
@@ -29,9 +31,35 @@ export const useGameSession = defineStore('gameSession',{
             console.log('Setting to Original States')
             const store = useGameSession()
             store.$reset()
+            // creating Game
+            this.createGame()
             console.log('Done')
             console.log('Initializing the Game!')
 
+        },
+        createGame(){
+            
+            const required = this.rounds * 2
+            const totalNFT = 20
+            let ids: any[] = [];
+            for(let i=1; i<=totalNFT;i++) {
+                // const numb = Math.floor((Math.random() * totalNFT) + 1)
+                ids.push(i)
+            }
+            const required_ids = ids.sort(() => Math.random() - 0.5).slice(0,required)
+            console.warn(required_ids)
+            for(let i=0; i<required_ids.length;i += 2) {
+                const gamePairs = {
+                    first : 0,
+                    second: 0,
+                }
+                gamePairs.first = required_ids[i]
+                gamePairs.second = required_ids[i+1]
+                this.gamePlay.push(gamePairs)
+
+            }
+            // this.gamePlay = this.gamePlay.sort(() => Math.random() - 0.5).slice(0,required)
+            console.log(this.gamePlay)
         },
         acceptRules(){
             this.rulesAccepted = true

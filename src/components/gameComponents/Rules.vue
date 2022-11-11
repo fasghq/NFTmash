@@ -3,8 +3,8 @@
         Rules
     </div>
 
-    <div class="sm:h-5/6 overflow-auto border-[2px] text-justify p-[15px]">
-        <div v-for='(item, index) in rules' class="border mt-[5px] mb-[5px]">
+    <div class="sm:h-5/6 overflow-auto border-[2px] text-justify sm:p-[15px] m-[10px] sm:m-[20px]">
+        <div v-for='(item, index) in rules' class="mt-[5px] mb-[5px] p-[10px]">
                 {{ index + 1 }}. {{ item }}
         </div>
     </div>

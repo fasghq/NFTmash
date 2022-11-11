@@ -7,15 +7,14 @@
 
         <!-- Rules Page -->
         <div v-if="!rulesAccepted"
-            class="sm:w-1/2 h-2/3 sm:mx-auto p-[20px] text-center flex flex-col justify-around border-[2px]">
+            class="sm:w-1/2 h-2/3 sm:mx-auto p-[20px] text-center flex flex-col sm:justify-around border">
             <!-- Text with Rules -->
             <Rules></Rules>
             <!-- Agree Button -->
-            <div>
+            <div class="">
                 <Button :action='acceptRules' buttonText="Let's Play!"></Button>
             </div>
         </div>
-
         <div v-if="rulesAccepted" class="text-center">
             <!-- Game -->
             <div v-for="i in rounds">
@@ -29,8 +28,6 @@
             </div>
         </div>
         <!-- Footer -->
-
-        <button></button>
         <Footer></Footer>
     </div>
 </template>
@@ -76,7 +73,7 @@ export default {
         this.initializeGame()
     },
     computed:{
-        ...mapState(useGameSession,['rulesAccepted','rounds','round','gameOver'])
+        ...mapState(useGameSession,['rulesAccepted','rounds','round','gameOver','gamePlay'])
     },
     methods: {
         ...mapActions(useGameSession, ['sayHi','initializeGame','acceptRules','nextRound'])

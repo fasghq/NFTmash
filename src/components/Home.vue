@@ -5,10 +5,17 @@
     <Header></Header>
     <!-- Page Description -->
     <div class="text-center">
-
+      <div>
         <router-link to="smashIt">
-          <Button buttonText="Smash It Now!"></Button>
+          <Button buttonText="S'mash It Now!"></Button>
         </router-link>
+      </div>
+      <br>
+      <div>
+        <router-link to="NFT_Demo">
+          <Button buttonText="Search My NFT"></Button>
+        </router-link>
+      </div>
     </div>
 
     <!-- Footer -->
