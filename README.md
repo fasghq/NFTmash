@@ -1,30 +1,67 @@
 # NFTSmash
+### Pre-requisite:
+- [Jupyter Notebook](https://jupyter.org/install)
+- API key from [TronGrid](https://www.trongrid.io/) for TRON network
+- API key from [infura](https://infura.io/dashboard) for ethereum network. 
 
-This template should help get you started developing with Vue 3 in Vite.
 
-## Recommended IDE Setup
+### Running the repository
+- ##### Open Terminal and run the following commands:
+    - Clone the repository: 
+        ```
+        git clone https://github.com/yashmadhwal/NFTmash.git
+        ```
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+    - After cloning, go the folder:
+        ```
+        cd NFTmash
+        ```
+    
+    - Project Setup:
+        ```
+        npm install
+        ```
 
-## Customize configuration
+    - Compile and Hot-Reload for Development
+        ```
+        npm run dev
+        ```
+    
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## For creating Data
+- ##### Open separate Terminal and run the following commands:
+    - From the root folder go to TRON_DataCollection:
+        ```
+        cd TRON_DataCollection
+        ```
 
-## Project Setup
+    - Go the the Keys folder and create a file `secrets.json`:
+        ```
+        cd Keys
+        touch secrets.json
+        ```
+    - Open `secrets.json` by running `open secrets.json` or opening by any code editor and paste the following and save it:
+        ```
+        {
+            "api_keys": {
+                "tron_api" : "#your_TRON_api_key",
+                "infura_api": "#your_Infura_api_key"
+            }
+        }
+        ```
+        Replace the api keys with your keys.
+- ##### Running the jupyter notebook:
+    - Navigate back to the main folder:
+        ```
+        cd ..
+        ```
+    - Open jupyter notebook:
+        ```
+        jupyter notebook
+        ```
+    
 
-```sh
-npm install
-```
 
-### Compile and Hot-Reload for Development
 
-```sh
-npm run dev
-```
 
-### Compile and Minify for Production
 
-```sh
-npm run build
-```
-# NFTmash
