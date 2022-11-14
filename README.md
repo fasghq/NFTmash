@@ -60,8 +60,3 @@
         jupyter notebook
         ```
     
-
-
-
-
-
