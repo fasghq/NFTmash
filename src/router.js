@@ -6,7 +6,7 @@ import NFT_Demo from './pages/NFT_Demo.vue';
 import InfoBAYC from './pages/InfoNFTs/InfoBAYC.vue'
 import InfoMAYC from './pages/InfoNFTs/InfoMAYC.vue'
 
-import NFT_Info from './components/NFT_Info/NFT_Info.vue';
+import PageNotFound from './pages/PageNotFound.vue';
 
 const routes=[
     {
@@ -23,6 +23,11 @@ const routes=[
         name:'NFT_Demo',
         path:'/NFT_Demo',
         component: NFT_Demo
+    },
+    {
+        name:'404Error',
+        path:'/:pathMatch(.*)*',
+        component: PageNotFound
     },
     {
         name:'InfoBAYC',

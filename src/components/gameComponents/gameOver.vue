@@ -6,7 +6,11 @@
 
         <!-- Here will come the scroll bar -->
         Here is your game Summary:
-        <div class="sm:h-5/6 overflow-auto border-[2px] text-center sm:p-[15px] m-[10px] sm:m-[20px]">
+
+        <div class="h-5/6 overflow-auto border-[2px] text-center sm:p-[15px] m-[10px] sm:m-[20px]">
+            <div class="underline m-[10px]">
+                {{ title }}
+            </div>
             <div v-for="i in result" class="p-[10px]">
                 In Round {{ i.round }}, you selected {{ i.selected }} which is
                 <span v-if="i.result == true" class="text-[#80ff72]">Right</span>
@@ -43,7 +47,15 @@ export default {
     },
     data() {
         return {
-            correctCount: 0
+            correctCount: 0,
+            Score_Title: [
+                "Professor Xavier: seems you never judge somebody. Do you think all NFTs are the same?",
+                "Thor: Mjölnir s'mashed one bad guy and seems to be broken somehow.",
+                "Wolverine: each hand is for one bad guy. Are you stucked?",
+                "Hulk s'mashes everything. Lucky to save more good guys this time.",
+                "Fantastic 4 rescued. Bad guy is s'mashed!",
+                "Hawkeye: s'mashed all the bad guys!"],
+            title: ''
         }
     },
     beforeMount() {
@@ -52,6 +64,7 @@ export default {
             if (this.result[i].result == true)
                 this.correctCount++;
         }
+        this.title = this.Score_Title[this.correctCount]
     },
     computed: {
         ...mapState(useGameSession, ['result'])

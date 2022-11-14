@@ -1,36 +1,29 @@
 <template>
     <!-- Main modal -->
-    <div class="w-full mx-auto sm:w-max font-arcade">
+    <div v-if="NFTExist" class="w-full mx-auto sm:w-max font-arcade">
         <div class="w-full flex flex-col justify-center md:inset-0 h-modal md:h-screen ">
             <div class=" p-4 border-[1px] w-full max-w-4xl h-full md:h-auto">
                 <!-- Modal content -->
                 <div class=" bg-white rounded-lg">
                     <!-- Modal header -->
                     <div class="flex justify-around items-start p-5 rounded-t border-b">
-                        <h3 class="text-3xl lg:text-2xl ">
+                        <h3 class="text-3xl lg:text-2xl text-center">
                             {{ NFT }} id: {{ id }}
                         </h3>
                     </div>
-                    <!-- Modal body -->
-                    <!-- <img class="rounded-[15px] w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]"
-                        :src="'/src/data/' + `${NFT}/` + `${pic_id}` + '.jpg'" :alt="id"> -->
 
-                        <img class="rounded-[15px] w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]"
-                        :src="link" :alt="id">
+                    <img class="rounded-[15px] mx-auto w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]" :src="link" :alt="id">
 
-                    <!-- <div v-if="!NFTExist" class="p-[20px] sm:flex ">
-    
-                        <div class="w-3/5 sm:w-2/5 mx-auto">
-                            <img class="rounded-[15px]" src="../assets/Images/Modal/error/NoBird.jpeg" alt="Bird Not Hatched">
+                    <br>
+                    <div class="text-center">
+                        <div class="m-[10px]">
+                            Rank: {{ rank }}
                         </div>
-    
-                        <div class='sm:flex sm:justify-around sm:w-3/5 mt-[15px] sm:mt-0'>
-                            <div class="grid place-content-center text-center sm:text-[20px]">
-                                Opps! The NFT not found.
-                            </div>
+                        <div class="m-[10px]">
+                            Score: {{ score }}
                         </div>
-                    </div> -->
-                    <!-- Modal footer -->
+                    </div>
+
                     <div class="p-6 rounded-b border-t ">
                         <div class="flex items-center w-max mx-auto ">
                             <Button :action='goBack' buttonText="Go back!"></Button>
@@ -40,6 +33,16 @@
             </div>
         </div>
     </div>
+    <div v-if="!NFTExist">
+        
+        <div class="font-arcade grid place-items-center h-screen text-[30px]">
+        <div class="text-center">
+            Opps! Something went wrong <br>
+            Enter Correct NFT ID. <br>
+            <router-link to="/NFT_Demo"><Button class="mt-[20px]" buttonText="Go Back"></Button></router-link>
+        </div>
+    </div>
+    </div>
 </template>
 
 <script>
@@ -48,7 +51,9 @@ import { useRoute } from 'vue-router'
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 // Import Data
-// import birdData from '../assets/data/data.json'
+import BAYC_Info from '../../data_scores/BAYC/BAYC_Scores.json'
+import MAYC_Info from '../../data_scores/MAYC/MAYC_Scores.json'
+
 import Button from '../button.vue'
 
 export default {
@@ -64,7 +69,10 @@ export default {
             id: 0,
             pic_id: 0,
             NFTExist: true,
-            link: ''
+            link: '',
+            score: 0,
+            rank: 0
+
         }
     },
     async beforeMount() {
@@ -72,18 +80,27 @@ export default {
         const temp = route.params.id;
         this.id = temp
         this.pic_id = Number(this.id)
+
+        const storage = getStorage();
+        await getDownloadURL(ref(storage, `${this.NFT}` + '/' + `${this.pic_id}.jpg`))
+            .then((url) => {
+                this.link = url
+            })
+            .catch((error) => {
+                // Handle any errors
+                this.NFTExist = false
+                console.log("NFT Does Not Exist")
                 
-        try {
-            const storage = getStorage();
-            await getDownloadURL(ref(storage, `${this.NFT}` + '/'+`${this.pic_id}.jpg`))
-                .then((url) => {
-                    this.link = url
-                })
-                .catch((error) => {
-                    // Handle any errors
-                });
-        } catch {
-            console.log("NFT Does Not Exist")
+            });
+
+        // Getting Score value
+        if (this.NFT == 'BAYC') {
+            // Getting Score
+            this.score = BAYC_Info[this.pic_id]['Score']
+            this.rank = BAYC_Info[this.pic_id]['Rank']
+        } else {
+            this.score = MAYC_Info[this.pic_id]['Score']
+            this.rank = MAYC_Info[this.pic_id]['Rank']
         }
     },
     methods: {

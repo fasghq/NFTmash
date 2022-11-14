@@ -61,7 +61,6 @@ import { useNFTid } from '../stores/nft_Information'
 
 // importing states
 import {
-    mapState,
     mapActions
 } from 'pinia'
 

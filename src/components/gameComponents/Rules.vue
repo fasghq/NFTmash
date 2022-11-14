@@ -11,13 +11,11 @@
 </template>
 
 <script>
-// accessing Pinia
 import { useGameSession } from '../../stores/gameSession'
 
 // importing states
 import {
     mapState,
-    mapActions
 } from 'pinia'
 
 export default {

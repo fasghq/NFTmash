@@ -1,23 +1,20 @@
 import {defineStore} from 'pinia'
-import { transformWithEsbuild } from 'vite'
 
 export const useGameSession = defineStore('gameSession',{
     state:() =>{
         return{
             // rules
             rules: [
-                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.",
-                "Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-                "Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.",
-                "Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.",
-                "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus.",
-                "Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisivel augue.",
-                "Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.",
-                "Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus."
+                "You will be presented with 5 pairs of NFTs",
+                "One of the NFT is rare (valuable) than the other",
+                "You need to choose the most valuable one",
+                "After each round, you will see the result of your choice",
+                "At the end of the game (i.e.) after 5 rounds, you will see your game summary",
+                "Most important: Have Fun!!"
             ],
-            rulesAccepted: true,
+            rulesAccepted: false,
             // Game Play Information
-            rounds: 3,
+            rounds: 5,
             round: 1,
             // create gamePlay
             gamePlay:[],
@@ -65,7 +62,7 @@ export const useGameSession = defineStore('gameSession',{
             this.rulesAccepted = true
         },
         // Game play functions
-        SelectNFT(id,selection){
+        SelectedNFT(id,selection){
             // Storing result in result array
             const resultObject = {
                 round :0,
