@@ -29,3 +29,7 @@ coverage
 
 # all Data files
 src/data/
+
+# TRON_DATA
+
+TRON_DataCollection/Keys/secrets.json
