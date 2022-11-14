@@ -6,7 +6,7 @@
     <div class="text-center mx-auto">
       <div>
         <router-link to="smashIt">
-          <Button buttonText="s'Mash It Now!" class="w-full"></Button>
+          <Button buttonText="sMash It Now!" class="w-full"></Button>
         </router-link>
       </div>
       <br>
