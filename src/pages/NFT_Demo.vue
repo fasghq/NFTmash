@@ -6,15 +6,42 @@
         <!-- Page Description -->
 
         <!-- Search Option -->
-        <div class="flex justify-center">
-            <input
-                class="border border-[#80ff72] h-max p-[10px] rounded-[12px] hover:border-[#80ff72] focus:outline-none focus:border-[#80ff72] text-center"
-                placeholder="Enter NFT Id" pattern="\d*" maxlength="5" v-model="id" required>
-            <router-link :to="`/NFT_Demo/${id}`">
-                <Button :action="info" buttonText="Get"></Button>
-            </router-link>
-        </div>
+        <div class="text-center mx-auto">
+            <!-- ID Input -->
+            <div class="p-[10px]">
+                <input
+                    class="border border-[#80ff72] h-max p-[10px] rounded-[12px] hover:border-[#80ff72] focus:outline-none focus:border-[#80ff72] text-center"
+                    placeholder="Enter NFT Id" pattern="\d*" maxlength="5" v-model="id" required>
+            </div>
+            <!-- BAYC or MAYC -->
+            <div class="p-[10px]">
+                <select v-model="selected" class="border border-[#80ff72] h-max w-full p-[10px] rounded-[12px] hover:border-[#80ff72] focus:outline-none focus:border-[#80ff72] text-center">
+                    <option disabled value="">Select NFT</option>
+                    <option>BAYC</option>
+                    <option>MAYC</option>
+                </select>
+            </div>
 
+            <!-- Button -->
+            <div class="p-[10px]">
+                <div v-if="selected == 'BAYC'">
+                    <router-link :to="`/NFT_Demo/BAYC/${id}`">
+                        <Button :action="info" buttonText="Get" class="w-1/2"></Button>
+                    </router-link>
+                </div>
+
+                <div v-if="selected == 'MAYC'">
+                    <router-link :to="`/NFT_Demo/MAYC/${id}`">
+                        <Button :action="info" buttonText="Get" class="w-1/2"></Button>
+                    </router-link>
+                </div>
+
+                <div v-if="selected == ''">
+                    <Button buttonText="Get" class="cursor-not-allowed bg-[#10a500] hover:bg-[#10a500] w-1/2"></Button>
+                </div>
+            </div>
+
+        </div>
         <!-- Footer -->
         <Footer></Footer>
     </div>
@@ -49,6 +76,7 @@ export default {
     data() {
         return {
             id: '',
+            selected: ''
         }
     },
     beforeMount() {
@@ -73,6 +101,10 @@ export default {
             }
 
             // console.log('error', this.error)
+        },
+        selectedOption() {
+            // console.log('--------')
+            console.log(this.selected)
         }
     },
 }

@@ -15,7 +15,7 @@ export const useGameSession = defineStore('gameSession',{
                 "Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.",
                 "Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus."
             ],
-            rulesAccepted: false,
+            rulesAccepted: true,
             // Game Play Information
             rounds: 3,
             round: 1,
@@ -40,14 +40,14 @@ export const useGameSession = defineStore('gameSession',{
         createGame(){
             
             const required = this.rounds * 2
-            const totalNFT = 20
+            const totalNFT = 10000
             let ids: any[] = [];
             for(let i=1; i<=totalNFT;i++) {
                 // const numb = Math.floor((Math.random() * totalNFT) + 1)
                 ids.push(i)
             }
             const required_ids = ids.sort(() => Math.random() - 0.5).slice(0,required)
-            console.warn(required_ids)
+            // console.warn(required_ids)
             for(let i=0; i<required_ids.length;i += 2) {
                 const gamePairs = {
                     first : 0,
@@ -59,21 +59,23 @@ export const useGameSession = defineStore('gameSession',{
 
             }
             // this.gamePlay = this.gamePlay.sort(() => Math.random() - 0.5).slice(0,required)
-            console.log(this.gamePlay)
+            // console.log(this.gamePlay)
         },
         acceptRules(){
             this.rulesAccepted = true
         },
         // Game play functions
-        SelectNFT(id){
+        SelectNFT(id,selection){
             // Storing result in result array
             const resultObject = {
                 round :0,
                 selected: 0,
+                result: null
             }
             // Inititializing
             resultObject.round = this.round
             resultObject.selected = id
+            resultObject.result = selection
 
             // Adding result to array
             this.result.push(resultObject)

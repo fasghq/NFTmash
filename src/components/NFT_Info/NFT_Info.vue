@@ -8,11 +8,16 @@
                     <!-- Modal header -->
                     <div class="flex justify-around items-start p-5 rounded-t border-b">
                         <h3 class="text-3xl lg:text-2xl ">
-                            Ape id: {{id}}
+                            {{ NFT }} id: {{ id }}
                         </h3>
                     </div>
                     <!-- Modal body -->
-                    <img class="rounded-[15px]" :src="'/src/data/BAYC/jpg/' + `${pic_id}` + '.jpg'" :alt="id">
+                    <!-- <img class="rounded-[15px] w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]"
+                        :src="'/src/data/' + `${NFT}/` + `${pic_id}` + '.jpg'" :alt="id"> -->
+
+                        <img class="rounded-[15px] w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]"
+                        :src="link" :alt="id">
+
                     <!-- <div v-if="!NFTExist" class="p-[20px] sm:flex ">
     
                         <div class="w-3/5 sm:w-2/5 mx-auto">
@@ -38,10 +43,9 @@
 </template>
 
 <script>
-import { mapActions } from 'pinia';
-import { useRoute } from 'vue-router'
 
-import {useNFTid} from '../../stores/nft_Information'
+import { useRoute } from 'vue-router'
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 // Import Data
 // import birdData from '../assets/data/data.json'
@@ -53,31 +57,39 @@ export default {
         Button
     },
     props: {
-
+        NFT: String
     },
     data() {
         return {
             id: 0,
             pic_id: 0,
-            NFTExist: true
+            NFTExist: true,
+            link: ''
         }
     },
-    beforeMount() {
+    async beforeMount() {
         const route = useRoute();
         const temp = route.params.id;
         this.id = temp
         this.pic_id = Number(this.id)
+                
         try {
-           
-
+            const storage = getStorage();
+            await getDownloadURL(ref(storage, `${this.NFT}` + '/'+`${this.pic_id}.jpg`))
+                .then((url) => {
+                    this.link = url
+                })
+                .catch((error) => {
+                    // Handle any errors
+                });
         } catch {
-            console.log("Bird Does Not Exist")
+            console.log("NFT Does Not Exist")
         }
     },
     methods: {
-            goBack(){
-                history.back()
-            }
+        goBack() {
+            history.back()
+        }
     },
 }
 </script>
